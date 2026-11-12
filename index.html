@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>O Farol de Cinzas</title>
+<meta name="description" content="RPG em pixel art: Lia e o filhote Tição precisam reacender a Chama Eterna do farol.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
+<style>
+  /* Tela única de jogo, escura por escolha: o canvas fica centralizado e escala para caber. */
+  :root {
+    --bg: #07060c; --fg: #f3ead7; --accent: #d79b45; --panel: rgba(30, 24, 48, 0.55); --line: rgba(215, 155, 69, 0.55);
+    --font: VT323, "Courier New", monospace;
+    color-scheme: dark;
+  }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg); color: var(--fg); font-family: var(--font); overflow: hidden;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    touch-action: none; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;
+  }
+  #wrap { flex: 1 1 auto; width: 100%; display: flex; align-items: center; justify-content: center; min-height: 0; }
+  canvas { display: block; image-rendering: pixelated; image-rendering: crisp-edges; background: #000; box-shadow: 0 0 40px rgba(215, 155, 69, 0.12); outline: none; }
+  #touch { display: none; }
+  body.touch-on #touch {
+    display: flex; justify-content: space-between; align-items: flex-end; width: 100%; box-sizing: border-box;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-bottom: max(12px, env(safe-area-inset-bottom, 0px)); padding-top: 8px; gap: 8px;
+  }
+  @media (orientation: landscape) {
+    body.touch-on #touch { position: fixed; left: 0; right: 0; bottom: 0; pointer-events: none; }
+    body.touch-on #touch > * { pointer-events: auto; opacity: 0.55; }
+  }
+  #touch { --k: min(54px, 11vw); --b: min(68px, 14vw); }
+  .dpad { display: grid; grid-template-columns: repeat(3, var(--k)); grid-template-rows: repeat(3, var(--k)); gap: 4px; flex: none; }
+  .dpad [data-a="up"] { grid-column: 2; grid-row: 1; }
+  .dpad [data-a="left"] { grid-column: 1; grid-row: 2; }
+  .dpad [data-a="right"] { grid-column: 3; grid-row: 2; }
+  .dpad [data-a="down"] { grid-column: 2; grid-row: 3; }
+  .mid { display: flex; flex-direction: column; gap: 8px; align-items: center; flex: none; }
+  .btns { display: grid; grid-template-columns: var(--b) var(--b); grid-template-rows: var(--b); gap: 8px; flex: none; }
+  .btns .a { grid-column: 2; grid-row: 1; height: var(--b); }
+  .btns .b { grid-column: 1; grid-row: 1; height: var(--b); }
+  #touch button {
+    font-family: var(--font); font-size: 22px; color: var(--fg); background: var(--panel);
+    border: 2px solid var(--line); border-radius: 12px; padding: 0; touch-action: none;
+  }
+  #touch .a, #touch .b { border-radius: 50%; font-size: 26px; }
+  #touch .small { font-size: 18px; padding: 6px 10px; border-radius: 10px; min-width: 64px; }
+  #touch button.on { background: rgba(215, 155, 69, 0.45); }
+  #touch button:focus-visible { outline: 2px solid var(--accent); }
+  @media (prefers-reduced-motion: reduce) { canvas { box-shadow: none; } }
+</style>
+</head>
+<body>
+<div id="wrap"><canvas id="game" width="960" height="576" tabindex="0" aria-label="O Farol de Cinzas — jogo"></canvas></div>
+<div id="touch" aria-label="Controles de toque">
+  <div class="dpad">
+    <button data-a="up" aria-label="Cima">▲</button>
+    <button data-a="left" aria-label="Esquerda">◀</button>
+    <button data-a="right" aria-label="Direita">▶</button>
+    <button data-a="down" aria-label="Baixo">▼</button>
+  </div>
+  <div class="mid">
+    <button class="small" data-a="run">Correr</button>
+    <button class="small" data-a="mute">Som</button>
+  </div>
+  <div class="btns">
+    <button class="b" data-a="cancel" aria-label="Voltar ou menu">X</button>
+    <button class="a" data-a="ok" aria-label="Confirmar">Z</button>
+  </div>
+</div>
+<script src="js/engine.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/gfx.js"></script>
+<script src="js/data.js"></script>
+<script src="js/state.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/world.js"></script>
+<script src="js/battle.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/mapkit.js"></script>
+<script src="js/maps.js"></script>
+<script src="js/maps2.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
