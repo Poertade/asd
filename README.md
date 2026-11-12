@@ -1,3 +1,14 @@
+# Jogos
+
+Este repositório tem dois jogos feitos em HTML5 + JavaScript puro, sem dependências nem etapa de build. Basta abrir o `index.html` de cada um no navegador.
+
+| Jogo | Gênero | Como abrir |
+|---|---|---|
+| **O Farol de Cinzas** | RPG por turnos | `index.html` (raiz) |
+| **Vale dos Monstrinhos** | Fazenda, vida no campo e monstrinhos | `vale-dos-monstrinhos/index.html` |
+
+---
+
 # O Farol de Cinzas
 
 Um RPG de turnos em pixel art, feito inteiramente em HTML5 + JavaScript puro (sem bibliotecas e sem etapa de build).
@@ -52,3 +63,33 @@ js/maps.js        mapas e história (parte 1)
 js/maps2.js       mapas e história (parte 2)
 js/main.js        inicialização e laço principal
 ```
+
+---
+
+# Vale dos Monstrinhos
+
+Um jogo de fazenda e vida no campo em pixel art: você herda o sítio da Vó Lurdes num vale onde vivem monstrinhos. Cultive a terra, faça amizade com os moradores e com os monstrinhos, desça na caverna e devolva o brilho à Árvore-Lua.
+
+Abra `vale-dos-monstrinhos/index.html` no navegador.
+
+| Ação | Teclado | Toque (celular) |
+|---|---|---|
+| Andar | Setas ou WASD | Direcional |
+| Usar ferramenta / falar / interagir | Z, Espaço ou Enter (segure para repetir) | Botão Z |
+| Abrir o menu / voltar | X, Esc ou I | Botão X |
+| Trocar item da barra | Q / E ou teclas 1 a 8 | Botões Q◀ / ▶E |
+| Som | M | Botão Som |
+
+O jogo salva quando você dorme na cama da casa.
+
+**O que tem no jogo**
+- **Sítio:** cave, plante, regue e colha 13 cultivos em 4 estações de 7 dias. Venda pela caixa de envio, que paga na manhã seguinte.
+- **Monstrinhos:** 7 espécies para fazer amizade (com Biscoito Monstro ou a comida favorita, uma vez por dia). No curral, a Gotinha rega, o Brotinho faz as plantas crescerem, o Pedregulho limpa o terreno e os outros produzem ovos, lã, cogumelos e brasas. Eles precisam de ração no cocho e gostam de carinho.
+- **Vila Bruma:** 6 moradores com rotina ao longo do dia, conversas, presentes e corações de amizade. Tem a loja de sementes da Dona Flor e a ferraria do Seu Malho, que melhora as ferramentas e reforma o curral.
+- **Caverna Brumosa:** 20 andares gerados na hora, com minérios, gemas, monstros com bolor, combate em tempo real e o chefe Rei Bolor no fundo.
+- **Também:** pesca com um minijogo de ritmo em três lugares, receitas, baú, habilidades que sobem de nível, clima (sol, chuva, neve) e ciclo de dia e noite.
+- **Objetivo principal:** entregar as quatro oferendas no altar da Árvore-Lua e levar até ela o Coração de Bolor. O jogo continua depois do final.
+
+**Estrutura** (`vale-dos-monstrinhos/js/`): `core.js` (engine), `audio.js` + `music.js` (som), `artbase.js` + `art.js` (arte em pixel), `data.js` (itens, cultivos, monstros, moradores), `state.js` (estado e salvamento), `maps.js` (mapas e gerador da caverna), `world.js` (jogabilidade), `render.js` (desenho e HUD), `uibase.js` + `ui.js` (menus e telas), `main.js` (inicialização).
+
+Para gerar um arquivo único de qualquer um dos jogos: `python3 tools/build_single.py --src=vale-dos-monstrinhos` (sem `--src` gera O Farol de Cinzas).
